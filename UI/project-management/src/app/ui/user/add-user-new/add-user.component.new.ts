@@ -41,7 +41,7 @@ import { EditUserComponentViewModel } from "./edit.user.componentviewmodel";
     // @Output()
     // messageEvent=new EventEmitter<boolean> ();
   
-    private userViewModel:EditUserComponentViewModel;
+    userViewModel:EditUserComponentViewModel;
 
     constructor(
       private service: IPmApiService,
