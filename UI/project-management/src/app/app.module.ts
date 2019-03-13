@@ -31,6 +31,8 @@ import { OnLoadRepository } from './repository/user/user.action';
 import { EffectsModule } from '@ngrx/effects';
 import {  StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { IUserRepository, UserRepository } from './repository/user/user.repository';
+import { TextBoxComponent } from 'projects/shared-api';
+import { AddNewUserComponent } from './ui/user/add-user-new/add-user.component.new';
 //import { Store } from '@angular/core/src/render3/instructions';
 
 
@@ -56,7 +58,9 @@ import { IUserRepository, UserRepository } from './repository/user/user.reposito
     ArrayLenghtPipe,
     ViewTaskComponent,
     AddTaskComponent,
-    SearchModuleComponent
+    SearchModuleComponent,
+    AddNewUserComponent,
+    TextBoxComponent
   ],
   imports: [
     BrowserModule,

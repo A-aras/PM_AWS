@@ -1,0 +1,30 @@
+<!-- <p>
+  view-user works!
+</p> -->
+<form [formGroup]="userForm" class="form-horizontal formStyle">
+
+    <div class="container-fluid justify-content ">
+
+        <div class="row container-fluid reponseiveRowMargin">
+
+            <div class="row container-fluid reponseiveRowMargin">
+                    <TextBox-Comp [Content]="userViewModel.FirstName"></TextBox-Comp>
+                <!-- <label for="fNameInput" class="col-form-label col-sm-1 reponsiveLabel">First Name:
+                </label>
+                <div class="form-group form-inline col-sm-4 col-ignore-padding">
+                    <input id="fNameInput" type="text" placeholder="First Name..." class="form-control col-sm-12"
+                        [formControl]="fName" />
+                </div>
+                <div *ngIf="fName.invalid && fName.dirty && fName.errors?.required" class="alert alert-danger col-sm-5">
+                    First Name is Required
+                </div> -->
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+</form>

@@ -16,6 +16,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "shared-api": [
+        "dist/shared-api"
+      ],
+      "shared-api/*": [
+        "dist/shared-api/*"
+      ]
+    }
   }
 }
