@@ -9,5 +9,11 @@ export class UserReactiveModel extends ReactiveClassModel {
     @ReactiveProperty
     FirstName: string;
 
+/**
+ *
+ */
+constructor() {
+    super();
+}
 
 }

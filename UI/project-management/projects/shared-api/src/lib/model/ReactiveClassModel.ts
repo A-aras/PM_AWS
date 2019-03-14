@@ -37,6 +37,6 @@ export class ReactiveClassModel extends IReactiveClassModel {
         super();
         this.subject=new Subject<string>();
     }
-    private subject: Subject<string>;
+    subject: Subject<string>;
 }
 

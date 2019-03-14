@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -33,6 +34,9 @@ import {  StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { IUserRepository, UserRepository } from './repository/user/user.repository';
 import { TextBoxComponent } from 'projects/shared-api';
 import { AddNewUserComponent } from './ui/user/add-user-new/add-user.component.new';
+import {MatInputModule} from '@angular/material';
+
+
 //import { Store } from '@angular/core/src/render3/instructions';
 
 
@@ -64,6 +68,7 @@ import { AddNewUserComponent } from './ui/user/add-user-new/add-user.component.n
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -74,6 +79,7 @@ import { AddNewUserComponent } from './ui/user/add-user-new/add-user.component.n
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([UserRepositoryLoadEffect]),
     StoreDevtoolsModule.instrument(),
+    MatInputModule
   ],
   providers: [{provide: IPmApiService,useClass:PmApiService},
     {provide: InjectableRxStompConfig,useValue: myRxStompConfig},

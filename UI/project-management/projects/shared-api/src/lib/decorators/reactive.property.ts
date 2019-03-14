@@ -21,6 +21,8 @@ export function ReactiveProperty<TModel extends IReactiveClassModel>(target: TMo
         }
         else
         {
+            let subject=target['subject'];
+            console.log(subject);
             target.NotificationSubject=new Subject<string>(); 
             target.NotificationSubject.next(key);
         }
