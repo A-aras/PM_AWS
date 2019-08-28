@@ -1,0 +1,156 @@
+
+import { select, Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { combineLatest, map, startWith, catchError } from "rxjs/operators";
+import { IReactiveClassModel } from "../../model/IReactiveClassModel";
+import { MasterDataModel } from "../../model/MasterDataModel";
+import { ObservableCollection } from "../../model/ObservableCollection";
+import { IComponentPropetyViewModel } from "../shared/viewmodel/IComponentPropetyViewModel";
+import { PropertyViewModel } from "../shared/propertyViewModel/PropertyViewModel";
+import { ofType } from "@ngrx/effects";
+import { TryCatchStmt } from "@angular/compiler";
+import { ReactiveClassModel } from "../../model/ReactiveClassModel";
+
+
+export class ComboBoxPropertyViewModel extends PropertyViewModel {
+
+    public selectedItem: MasterDataModel;
+
+    public Items: ObservableCollection<MasterDataModel>;
+
+    public FilteredItems: MasterDataModel[];
+
+    public viewModel1: IComponentPropetyViewModel<ReactiveClassModel>;
+
+    constructor(public viewModel: IComponentPropetyViewModel<ReactiveClassModel>, propFunc: (model: IReactiveClassModel) => any) {
+        super(viewModel);
+        this.SetPropertyFunc(propFunc);
+        this.Items = new ObservableCollection<MasterDataModel>();
+        this.FilteredItems = [];
+
+        this.Form.valueChanges.subscribe(x => {
+            console.log('Form value changed');
+        });
+    }
+
+    private ApplyFilter(value: MasterDataModel|string, items: MasterDataModel[]): MasterDataModel[] {
+
+
+
+        try {
+            let searchValue='';
+            if (value === undefined || value === null)
+                return items;
+
+                if(value instanceof MasterDataModel)
+                {
+                    return items;
+                }
+                else
+                {
+                    searchValue = value;
+                }
+
+                if (searchValue==='')
+                {
+                    return items;
+                }
+
+            let filteredItems = items.filter((x, y) => {
+                return x.DisplayMember.toLowerCase().indexOf(searchValue) === 0;
+            });
+            console.log(filteredItems);
+            return filteredItems;
+        }
+        catch (e) {
+            console.log(e);
+        }
+
+
+
+    }
+
+    private CollectItemsFromStore(): Observable<MasterDataModel[]> {
+        let store = this.viewModel.Container.get(Store);
+        let domainItems =
+            store.pipe(select(this.PropertyRule.Enumaration.Selector))
+                .pipe(map(items => {
+                    let domainItem: MasterDataModel[] = [];
+                    let mappedValue = items.map(item => {
+                        let masterData = new MasterDataModel();
+                        masterData.DisplayMember = this.PropertyRule.Enumaration.DisplayValue(item);
+                        masterData.ValueMember = this.PropertyRule.Enumaration.ValuePath(item);
+                        domainItem.push(masterData);
+                    }
+                    );
+                    return domainItem;
+                }));
+
+        return domainItems;
+
+    }
+
+    public SetSelectedItem(value: any) {
+        // let matchingItem=this.FilteredItems.find(x=>x.ValueMember===value);
+        // if(matchingItem!=undefined)
+        // {
+        //     this.selectedItem=matchingItem;
+        // }
+        // else
+        // {
+        //     this.selectedItem=null;
+        // }
+        this.selectedItem = value;
+        if(this.selectedItem===undefined || this.selectedItem===null)
+        {
+            return;
+        }
+        this.Form.setValue(this.selectedItem.DisplayMember);
+        let selectedValue=this.PropertyRule.Enumaration.ValuePath(value);
+        this.SetPropertyValueToModel(selectedValue);
+        
+    }
+
+    protected ApplyEnumerations(): void {
+        if (this.PropertyRule.Enumaration != undefined) {
+            if (this.PropertyRule.Enumaration.Selector != undefined) {
+                let store = this.viewModel.Container.get(Store);
+
+                let formChange$ = this.Form.valueChanges.pipe(startWith(''), map((x => {
+                    return x;
+                })));
+
+
+                let enumarationChange$ = this.CollectItemsFromStore();
+
+                formChange$.pipe(combineLatest(enumarationChange$, (x, y) => {
+                    return { Value: x, item: y };
+                })).subscribe(x => {
+                    this.FilteredItems = this.ApplyFilter(x.Value, x.item);
+                });
+
+                // merge(formChange$,this.CollectItemsFromStore()).pipe(map((x)=>{
+
+                // }))
+
+                // //store.select(select(this.PropertyRule.Enumaration.Selector))
+                // store.pipe(select(this.PropertyRule.Enumaration.Selector))
+                //     .pipe(map(items => {
+                //         let domainItem: MasterDataModel[] = [];
+                //         let mappedValue = items.map(item => {
+                //             let masterData = new MasterDataModel();
+                //             masterData.DisplayMember = this.PropertyRule.Enumaration.DisplayValue(item);
+                //             masterData.ValueMember = this.PropertyRule.Enumaration.ValuePath(item);
+                //             domainItem.push(masterData);
+                //         }
+                //         );
+                //         return domainItem;
+                //     }))
+                //     .subscribe(x => {
+                //         this.Items.ReplaceAll(x);
+                //     });
+            }
+        }
+    }
+}
+

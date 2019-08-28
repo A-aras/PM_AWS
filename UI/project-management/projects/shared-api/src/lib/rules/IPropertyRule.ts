@@ -1,20 +1,28 @@
+import { IEnumeration } from "./IEnumeration";
 
-export abstract class IPropertyRule<TProperty=any, TModel=any>
+
+export interface IPropertyRule<TProperty=any, TModel=any,TEnumeration=any,TIdentifier=any>
 {
-    abstract  Name: string;
-    abstract FullLabel: string;
-    abstract Label: string;
-    abstract Default: TProperty;
+      Name: string;
+     FullLabel: string;
+     Label: string;
+     Default: TProperty;
 
-    abstract get EnabledFunc():(model: TModel)=>boolean;
+     EnabledFunc:(model: TModel)=>boolean;
     //abstract enabledFunc:(model: TModel)=>boolean;
 
-    abstract get MandatoryFunc():(model: TModel)=>boolean;
+     MandatoryFunc:(model: TModel)=>boolean;
 
     //abstract mandatoryFunc:(model: TModel)=>boolean;
 
-    abstract get PropertyValueFunc():(model: TModel)=>TProperty;
+     PropertyValueFunc:(model: TModel)=>TProperty;
 
     //abstract propertyValueFunc:(model: TModel) => TProperty;
+
+     Enumaration:IEnumeration<TEnumeration,TIdentifier>;
+
+     min:TProperty|null;
+
+     max:TProperty|null;
 
 }

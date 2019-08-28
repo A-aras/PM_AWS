@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="space-between">
+    <!-- <mat-form-field [floatLabel]="Never"> -->
+        <mat-checkbox [(formControl)]="InputForm">
+            {{ Content.PropertyRule.Label }}
+          </mat-checkbox>
+        
+          <mat-error *ngIf="InputForm.errors">
+            <div *ngFor="let error of (InputForm.errors | keyvalue)">
+              {{ error.value.Message }}
+            </div>
+          </mat-error>
+    <!-- </mat-form-field> -->
+  
+</div>

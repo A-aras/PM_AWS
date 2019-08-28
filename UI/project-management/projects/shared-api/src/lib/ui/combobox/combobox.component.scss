@@ -28,16 +28,9 @@ html {
   
   .btn-action-margin {
     margin-right: 3px !important;
-    /*margin-left: 20px!important;
-       padding-right: 20px!important;
-      padding-left: 20px!important; */
+   
   }
   
-  /* 
-  .btn-form-margin
-  {
-      margin-left: 10px!important;
-  } */
   
   @media screen and (max-width: 768px) {
     .btn-reponsive-margin {
@@ -143,15 +136,49 @@ html {
           padding-top: 1px !important;
         }
     }
-    /* .reponseiveRowMargin {
-      padding-bottom: 1px;
-      padding-top: 1px;
-    } */
+    
+
+    
+.icon{
+    font-family:'FontAwesome';
+    margin:1.2rem;
+    font-size:3.2em;
+    color: rgba(0,0,0, 0.8);
+    -webkit-font-smoothing: antialiased;
+  }
   
-  /* .btn-form-margin
-      {
-          margin-left: 0px!important;
-      }
-      
-       */
+  .icon .icon-style:after{
+    content: "\f150";
+   
+  }
   
+  .light{
+      -webkit-text-stroke: 4px white;
+  }
+  
+  .supersized{
+    font-size: 10rem;
+  }
+  
+  .icon-style:after{
+    content: "\f150";
+  }
+  
+  .outline{
+    -webkit-text-stroke: 1px red;
+  }
+  
+  .overlap{
+    -webkit-text-stroke: 4px rgba(255,0,0,1);
+  }
+  
+  .block {
+    display: inline-block;
+    vertical-align:top;
+    text-align: center;
+    width: 20%;
+    height: 150px;
+    border: 1px solid #999;
+    padding: 1%;
+    margin:1%;
+  }

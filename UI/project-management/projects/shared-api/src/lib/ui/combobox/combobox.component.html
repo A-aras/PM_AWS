@@ -1,0 +1,61 @@
+<div fxLayout="column" fxLayoutAlign="space-between">
+    <mat-form-field class="example-full-width">
+        
+
+            <input  fxLayoutAlign="start stretch"
+            type="search" [placeholder]="Content.PropertyRule.Label" aria-label="Content.PropertyRule.Label" matInput [formControl]="InputForm" [matAutocomplete]="auto">
+
+              <!-- <button *ngIf="InputForm.value" mat-icon-button matSuffix (click)="ClearSelection()" aria-label="inputclear">
+                    <fa-icon [icon]="faTimes" size="lg"></fa-icon>
+            </button> -->
+
+            <button mat-icon-button matSuffix (click)="ClearSelection()" aria-label="inputclear">
+                    <fa-icon [icon]="faTimes" size="1.5x" [styles]="{ 'stroke':'red','color': 'red','font-size':'20px'}"></fa-icon>
+            </button>
+
+
+
+            <!-- <button mat-icon-button matSuffix (click)="ClearSelection()" aria-label="inputclear">
+                    <fa-icon [icon]="faTimes" size="1.5x" [styles]="{ 'color': '#888','font-size':'20px'}"></fa-icon>
+
+                    <div class="block inline">
+                            <fa-icon [icon]="faTimes" size="1.5x" [classes]="['icon','light','icon-style']"  ></fa-icon>
+                    </div>
+            </button>
+ -->
+            <!-- <button *ngIf="InputForm.value" mat-icon-button matSuffix (click)="ClearSelection()" aria-label="inputclear">
+                    <mat-icon  svgIcon="inputclear"></mat-icon>
+            </button> -->
+
+            <!-- <button  mat-icon-button  fxLayoutAlign="end stretch"> -->
+                            <!-- <mat-icon fxLayoutAlign="end stretch">close</mat-icon> -->
+                          <!-- </button> -->
+                          <!-- <div fxLayoutAlign="flex start"> -->
+                                <!-- <mat-icon fxFlex="1 1 auto" >close</mat-icon> -->
+                          <!-- </div> -->   
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="OnOptionSelected($event)">
+                <mat-option *ngFor="let option of Content.FilteredItems" [value]="option" >
+                    {{option.DisplayMember}}
+                </mat-option>
+            </mat-autocomplete>
+
+
+
+    </mat-form-field>
+</div>
+
+<!-- <div class="row container-fluid reponseiveRowMargin" *ngIf="Content">
+    <mat-form-field class="example-full-width">
+        <input type="text"[placeholder]="Content.PropertyRule.Label" aria-label="Content.PropertyRule.Label" matInput [formControl]="InputForm" [matAutocomplete]="auto">
+        <button mat-icon-button>
+                <mat-icon aria-label="Example icon-button with a heart icon">close</mat-icon>
+              </button>
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of Content.FilteredItems" [value]="option.DisplayMember">
+                {{option.DisplayMember}}
+            </mat-option>
+        </mat-autocomplete>
+        
+    </mat-form-field>
+
+</div> -->

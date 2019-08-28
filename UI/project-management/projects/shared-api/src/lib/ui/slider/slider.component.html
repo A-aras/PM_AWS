@@ -1,0 +1,53 @@
+<div fxLayout="column" fxLayoutAlign="space-between">
+    <!-- <mat-card>
+      <mat-card-content> -->
+          <!-- <mat-form-field
+      class="example-full-width"> -->
+        <mat-label>{{ Content.PropertyRule.Label }}</mat-label>
+  
+        <!-- [step]="step"
+          [thumbLabel]="thumbLabel"
+          [tickInterval]="tickInterval"
+          [invert]="invert"
+          class="example-margin"
+          [vertical]="vertical" -->
+        <mat-slider
+          [disabled]="disabled"
+          [max]="Content.PropertyRule.max"
+          [min]="Content.PropertyRulemin"
+          [formControl]="InputForm"
+          [thumbLabel]="true"
+        >
+        </mat-slider>
+      <!-- </mat-form-field> -->
+      <!-- </mat-card-content>
+    </mat-card> -->
+  
+    <!-- <label for="fNameInput" class="col-form-label col-sm-1 reponsiveLabel">{{Content.PropertyRule.Label}}:
+      </label>
+      <div class="form-group form-inline col-sm-4 col-ignore-padding">
+          <input id="fNameInput" type="text" [placeholder]="Content.PropertyRule.Label" class="form-control col-sm-12"
+              [formControl]="InputForm" />
+      </div> -->
+  
+    <!-- [class.app-input-no-underline]='!Content.IsEnabled' -->
+  
+    <!-- <mat-label [hidden]="Content.IsDiabled">{{ InputForm.value }}</mat-label>
+    <mat-form-field
+      class="example-full-width"
+      [floatLabel]="Content.IsEnabled ? Auto : Never"
+      [hidden]="!Content.IsDiabled"
+    >
+      <input
+        matInput
+        [placeholder]="Content.PropertyRule.Label"
+        [formControl]="InputForm"
+      />
+      <mat-error *ngIf="InputForm.errors">
+        <div *ngFor="let error of (InputForm.errors | keyvalue)">
+          {{ error.value.Message }}
+        </div>
+      </mat-error>
+    </mat-form-field> -->
+  </div>
+  

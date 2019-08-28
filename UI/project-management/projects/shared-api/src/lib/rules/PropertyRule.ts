@@ -1,64 +1,85 @@
-import { IPropertyRule } from "./IPropertyRule"
+import { IPropertyRule } from "./IPropertyRule";
+import { IEnumeration } from "./IEnumeration";
+import { Enumeration } from "./Enumeration";
 
-export class PropertyRule<TProperty=any, TModel=any> extends IPropertyRule<TProperty, TModel>
-{
-    get MandatoryFunc(): ((model: TModel) => boolean)
-    {
-        return this.mandatoryFunc;
-    }
+export class PropertyRule<
+  TProperty = any,
+  TModel = any,
+  TEnumeration = any,
+  TIdentifier = any
+> implements IPropertyRule<TProperty, TModel, TEnumeration, TIdentifier> {
+  min: TProperty|null;
+  max: TProperty|null;
 
-    get PropertyValueFunc(): ((model: TModel) => TProperty)
-    {
-        return this.propertyValueFunc;
-    }
+  Name: string;
+  FullLabel: string;
+  Label: string;
+  Default: TProperty;
+  private _enabledFunc: (model: TModel) => boolean;
+  private _mandatoryFunc: (model: TModel) => boolean;
+  private _propertyValueFunc: (model: TModel) => TProperty;
+  private _enumeration: IEnumeration<TEnumeration, TIdentifier>;
 
-    get EnabledFunc(): ((model: TModel) => boolean)
-    {
-        return this.enabledFunc;
-    }
-    Name: string;    
-    FullLabel: string;
-    Label: string;
-    
-    Default: TProperty;
-    private _enabledFunc: (model: TModel) => boolean;
-    public get enabledFunc(): (model: TModel) => boolean {
-        return this._enabledFunc;
-    }
-    public set enabledFunc(value: (model: TModel) => boolean) {
-        this._enabledFunc = value;
-    }
-    private _mandatoryFunc: (model: TModel) => boolean;
-    public get mandatoryFunc(): (model: TModel) => boolean {
-        return this._mandatoryFunc;
-    }
-    public set mandatoryFunc(value: (model: TModel) => boolean) {
-        this._mandatoryFunc = value;
-    }
-    private _propertyValueFunc: (model: TModel) => TProperty;
-    public get propertyValueFunc(): (model: TModel) => TProperty {
-        return this._propertyValueFunc;
-    }
-    public set propertyValueFunc(value: (model: TModel) => TProperty) {
-        this._propertyValueFunc = value;
-    }
+  public get MandatoryFunc(): (model: TModel) => boolean {
+    return this._mandatoryFunc;
+  }
 
-    EnabledWhen(enabledFunc: (model: TModel) => boolean):this
-    {
-        this.enabledFunc=enabledFunc;
-        return this;
-    }
+  public set MandatoryFunc(value: (model: TModel) => boolean) {
+    this._mandatoryFunc = value;
+  }
 
-    MandatoryWhen(mandatoryFunc: (model: TModel) => boolean):this
-    {
-        this.mandatoryFunc=mandatoryFunc;
-        return this;
-    }
+  public get Enumaration(): IEnumeration<TEnumeration, TIdentifier> {
+    return this._enumeration;
+  }
 
-    WithLabel(label:string):this
-    {
-        this.Label=label;
-        this.FullLabel=label;
-        return this;
-    }
+  public set Enumaration(value: IEnumeration<TEnumeration, TIdentifier>) {
+    this._enumeration = value;
+  }
+
+  public get PropertyValueFunc(): (model: TModel) => TProperty {
+    return this._propertyValueFunc;
+  }
+
+  public set PropertyValueFunc(value: (model: TModel) => TProperty) {
+    this._propertyValueFunc = value;
+  }
+
+  public get EnabledFunc(): (model: TModel) => boolean {
+    return this._enabledFunc;
+  }
+
+  public set EnabledFunc(value: (model: TModel) => boolean) {
+    this._enabledFunc = value;
+  }
+
+  EnabledWhen(enabledFunc: (model: TModel) => boolean): this {
+    this._enabledFunc = enabledFunc;
+    return this;
+  }
+
+  MandatoryWhen(mandatoryFunc: (model: TModel) => boolean): this {
+    this._mandatoryFunc = mandatoryFunc;
+    return this;
+  }
+
+  WithLabel(label: string): this {
+    this.Label = label;
+    this.FullLabel = label;
+    return this;
+  }
+
+  WithEnumeration(enumeration: IEnumeration<TEnumeration, TIdentifier>): this {
+    this._enumeration = enumeration;
+    return this;
+  }
+
+  WithMin(min: TProperty): this {
+    this.min = min;
+    return this;
+  }
+
+  WithMax(max: TProperty): this {
+    this.max = max;
+    return this;
+  }
 }

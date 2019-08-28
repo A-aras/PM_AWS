@@ -1,0 +1,22 @@
+<div fxLayout="column" fxLayoutAlign="space-between">
+    <mat-form-field
+      class="example-full-width"
+      [floatLabel]="Content.IsEnabled ? Auto : Never"
+    >
+      <input
+        matInput
+        [matDatepicker]="picker1"
+        [placeholder]="Content.PropertyRule.Label"
+        [formControl]="InputForm"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+  
+      <mat-error *ngIf="InputForm.errors">
+        <div *ngFor="let error of (InputForm.errors | keyvalue)">
+          {{ error.value.Message }}
+        </div>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  

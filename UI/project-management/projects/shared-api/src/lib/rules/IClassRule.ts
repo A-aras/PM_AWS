@@ -1,10 +1,13 @@
 //import { BaseModel } from "../basemodel/BaseModel";
 import { PropertyRule } from "./PropertyRule";
 import { IPropertyRule } from "./IPropertyRule";
+import { IEnumeration } from "./IEnumeration";
 
-export abstract class IClassRule<TModel>
+export interface  IClassRule<TModel>
 {
-    abstract Properties: PropertyRule[];
+     Properties: PropertyRule[];
     //abstract ApplyTo(model: TModel);
-    abstract AddProperty<TProperty=any>(propertyFunc: (model: TModel) => TProperty): IPropertyRule<TProperty,TModel>;
+     AddProperty<TProperty=any>(propertyFunc: (model: TModel) => TProperty): IPropertyRule<TProperty,TModel>;
+
+     AddEnumaration(name:string): IEnumeration;
 }
